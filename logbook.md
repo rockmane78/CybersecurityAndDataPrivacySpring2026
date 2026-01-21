@@ -2,9 +2,8 @@
 
 | Date  | Used hours | Subject(s) |  Outcome(s) |
 | :---         |     :---:      |     :---:      |     :---:      |
-| 23.10.2025 | 4 | Preparing the course | Updated content |
-| 24.10.2025 | 4 | Preparing the course | Updated tasks  |
-| 28.10.2025 | 2 | Kick-off lecture  | Course started |
-| 3.11.2025 | 2 | Preparing for the lecture  | Material uptaded |
-| 4.11.2025 | 3 | Preparing for the lecture  | Material uptaded |
-| 4.11.2025 | 2 | Lecture intro to portswigger  | Lecture regording |
+| 7.1.2025 | 2 | Kick-off lecture | Course overview and objectives defined |
+| 15.1.2025 | 2 | Intro to PortSwigger | Familiarized with lab environment and tools  |
+| 18.1.2025 | 2 | VM instalation | Virtual machine environment set up and tested |
+| 21.1.2025 | 2 | Intro to Booking system project | Project scope and requirements understood |
+| 21.1.2025 | 1 | Course logistics | Clear understanding of schedule and workflow |
