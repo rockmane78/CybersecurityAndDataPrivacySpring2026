@@ -7,3 +7,4 @@
 | 18.1.2025 | 2 | VM instalation | Virtual machine environment set up and tested |
 | 21.1.2025 | 2 | Intro to Booking system project | Project scope and requirements understood |
 | 21.1.2025 | 1 | Course logistics | Clear understanding of schedule and workflow |
+| 23.1.2025 | 5 | Cisco "Introduction to Cybersecurity" | module 1,2,3 completed |
