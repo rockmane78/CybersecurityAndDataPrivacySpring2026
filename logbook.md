@@ -8,3 +8,4 @@
 | 21.1.2025 | 2 | Intro to Booking system project | Project scope and requirements understood |
 | 21.1.2025 | 1 | Course logistics | Clear understanding of schedule and workflow |
 | 23.1.2025 | 6 | Cisco "Introduction to Cybersecurity" | module 1,2,3 completed |
+| 24.1.2025 | 3 | Cisco "Introduction to Cybersecurity" | module 4,5 completed + picture send |
