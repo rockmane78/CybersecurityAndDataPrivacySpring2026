@@ -11,3 +11,5 @@
 | 24.1.2025 | 3 | Cisco "Introduction to Cybersecurity" | module 4,5 completed + picture send |
 | 28.1.2025 | 5 | LAB | 3 LABs completed |
 | 29.1.2025 | 3 | LAB | 6 LABs completed |
+| 29.1.2025 | 1 | docker | docker installed |
+| TOTAL: | 27h |
