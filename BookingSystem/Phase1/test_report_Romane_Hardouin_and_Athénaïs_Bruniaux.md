@@ -3,46 +3,46 @@
 ## 1. General Information
 
 **Tester(s):**
-* [cite_start]Romane Hardouin and Athénaïs Bruniaux [cite: 2]
+* Romane Hardouin and Athénaïs Bruniaux
 
 **Purpose:**
-[cite_start]Identify vulnerabilities in registration and authentication flows [cite: 4]
+Identify vulnerabilities in registration and authentication flows
 
 **Scope:**
-* [cite_start]**Tested components:** User Registration Form (Frontend), PostgreSQL Database storage (Backend). [cite: 6]
-* [cite_start]**Exclusions:** Login functionality, User sessions, Resource booking system, GDPR compliance (not testable yet). [cite: 7]
+* **Tested components:** User Registration Form (Frontend), PostgreSQL Database storage (Backend).
+* **Exclusions:** Login functionality, User sessions, Resource booking system, GDPR compliance (not testable yet).
 
 **Test approach:**
-[cite_start]Gray-box [cite: 8]
+Gray-box
 
 **Test environment & dates:**
-* [cite_start]**Start:** 30/01/2026 [cite: 10]
-* [cite_start]**End:** 04/02/2026 [cite: 11]
+* **Start:** 30/01/2026
+* **End:** 04/02/2026
 * **Test environment details:**
-    * [cite_start]OS: Debian Linux (VM) [cite: 12]
-    * [cite_start]Runtime: Docker version 29.2.0 [cite: 13]
-    * [cite_start]DB: PostgreSQL [cite: 14]
-    * [cite_start]Browsers: Mozilla Firefox 140.4.0esr [cite: 15]
+    - OS: Debian Linux (VM)
+    - Runtime: Docker version 29.2.0
+    - DB: PostgreSQL
+    - Browsers: Mozilla Firefox 140.4.0esr
 
 **Assumptions & constraints:**
-* **Constraints:** Limited time for Phase 1 (04/02/2026). The login button is non-functional (returns 404 error). [cite_start]Access is limited to the local Docker environment only. [cite: 17, 18]
-* [cite_start]**Assumptions:** The developer claims the system follows "Privacy by Design", so I assumed sensitive data should be encrypted from the start. [cite: 19]
+* **Constraints:** Limited time for Phase 1 (04/02/2026). The login button is non-functional (returns 404 error). Access is limited to the local Docker environment only.
+* **Assumptions:** The developer claims the system follows "Privacy by Design", so I assumed sensitive data should be encrypted from the start.
 
 ---
 
 ## 2. Executive Summary
 
 **Short summary:**
-The website's registration is currently not secure because passwords are saved in plain text and anyone can choose to be an Admin. [cite_start]Also, the form accepts impossible birth dates, and the login button doesn't work, so the system needs major fixes before it can be used. [cite: 21]
+The website's registration is currently not secure because passwords are saved in plain text and anyone can choose to be an Admin. Also, the form accepts impossible birth dates, and the login button doesn't work, so the system needs major fixes before it can be used.
 
-[cite_start]**Overall risk level:** 🔴 **High** [cite: 22]
+**Overall risk level:** 🔴 **High**
 
 **Top 5 immediate actions:**
-1. [cite_start]**Implement Strong Password Hashing:** Immediately stop storing passwords in plain text (F-01). [cite: 23]
-2. [cite_start]**Restrict Administrative Role Assignment:** Remove the role selection dropdown from the public registration form (F-03). [cite: 23]
-3. [cite_start]**Enforce Strict Server-Side Validation:** Fix the disconnect between the frontend and the database (F-07). [cite: 23]
-4. [cite_start]**Fix Core Authentication Functionality:** Resolve the technical bugs preventing the Login button from working (F-05). [cite: 23]
-5. [cite_start]**Enhance Data Input Sanitization:** Improve the system's ability to handle international characters (F-09) and email domain verification (F-08). [cite: 23]
+1. **Implement Strong Password Hashing:** Immediately stop storing passwords in plain text (F-01).
+2. **Restrict Administrative Role Assignment:** Remove the role selection dropdown from the public registration form (F-03).
+3. **Enforce Strict Server-Side Validation:** Fix the disconnect between the frontend and the database (F-07).
+4. **Fix Core Authentication Functionality:** Resolve the technical bugs preventing the Login button from working (F-05).
+5. **Enhance Data Input Sanitization:** Improve handling of international characters (F-09) and email domain verification (F-08).
 
 ---
 
