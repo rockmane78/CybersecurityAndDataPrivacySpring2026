@@ -1,63 +1,107 @@
-# Pentesting Report - Phase 1
+# 1️⃣ Introduction
 
-## 1. General Information
+**Testers:**  
+- Names:  Athénaïs Bruniaux and Romane Hardouin
 
-**Tester(s):**
-* Romane Hardouin and Athénaïs Bruniaux
+**Purpose:**  
+- Identify as many anomalies and vulnerabilities as possible and categorize the findings. Vulnerabilities such as: Authentication and Authorization, Input Validation,  Session Management, Data Encryption.
 
-**Purpose:**
-Identify vulnerabilities in registration and authentication flows
+**Scope:**  
+- Tested components:  
+User registration and input handling  
+Input validation mechanisms   
+Sensitive data encryption  
+Token Management  
 
-**Scope:**
-* **Tested components:** User Registration Form (Frontend), PostgreSQL Database storage (Backend).
-* **Exclusions:** Login functionality, User sessions, Resource booking system, GDPR compliance (not testable yet).
+- Exclusions:  
+Error Handling and Logging  
+Third-Party Components  
+Usability and Performance  
+GDPR Compliance  
+Privacy by Design (PbD) Principles
 
-**Test approach:**
-Gray-box
+- Test approach: Grey-box
 
-**Test environment & dates:**
-* **Start:** 30/01/2026
-* **End:** 04/02/2026
-* **Test environment details:**
-    - OS: Debian Linux (VM)
-    - Runtime: Docker version 29.2.0
-    - DB: PostgreSQL
-    - Browsers: Mozilla Firefox 140.4.0esr
+**Test environment & dates:**  
+- Start: 01/02/2026 
+- End:  04/02/2026
+- Test environment details (OS, runtime, DB, browsers):
+  
+  OS: Windows 11 Version 25H2 
+  
+  Runtime: Docker 29.1.5
+  
+  Database: PostgreSQL
+  
+  Brower: Mozilla Firefox  
 
-**Assumptions & constraints:**
-* **Constraints:** Limited time for Phase 1 (04/02/2026). The login button is non-functional (returns 404 error). Access is limited to the local Docker environment only.
-* **Assumptions:** The developer claims the system follows "Privacy by Design", so I assumed sensitive data should be encrypted from the start.
+**Assumptions & constraints:**  
+- First time using Docker and OWASP Zap.
+
+# 2️⃣ Executive Summary
+
+**Short summary:** 
+The web application’s user registration, input validation, and sensitive data handling mechanisms were tested. Several critical and medium vulnerabilities were identified, including SQL injection, weak or plain-text password storage, absence of CSRF protection, lack of domain validation, and weak password policies. Immediate remediation is recommended to protect user data and maintain system integrity and confidentiality
+
+**Overall risk level:** High
+
+**Top 5 immediate actions:**  
+
+1. Prevent SQL Injection and Path Traversal
+  Apply strict input validation on all user inputs, especially in registration forms.
+  Use parameterized queries or prepared statements to interact with the database.
+  Sanitize any user-supplied data to prevent manipulation of database commands.
+
+2. Secure Password Storage and Enforce Strong Password Policies
+  Hash and salt all passwords using strong algorithms (e.g., bcrypt, Argon2).
+  Reject weak passwords, including blanks or trivial patterns.
+  Encourage or require Multi-Factor Authentication (MFA) for all accounts.
+
+3. Add CSRF Protection for Forms and Sensitive Actions
+  Implement server-side anti-CSRF tokens for registration and other critical forms.
+  Use double-submitted cookies or per-request tokens to validate user actions.
+
+4. Validate and Restrict Input for Email and Other Fields
+  Ensure only valid email domains are accepted.
+  Reject clearly invalid or malformed data to prevent logical bypasses or errors.
+
+5. Encrypt Sensitive Data and Secure Error Handling
+  Encrypt personal and authentication data both at rest and in transit using up-to-date algorithms.
+  
+---
+
+# 3️⃣ Severity scale & definitions
+
+|  **Severity Level**  | **Description**                                                                                                              | **Recommended Action**           |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+|      🔴 **High**     | A serious vulnerability that can lead to full system compromise or data breach (e.g., SQL Injection, Remote Code Execution). | *Immediate fix required*         |
+|     🟠 **Medium**    | A significant issue that may require specific conditions or user interaction (e.g., XSS, CSRF).                              | *Fix ASAP*                       |
+|      🟡 **Low**      | A minor issue or configuration weakness (e.g., server version disclosure).                                                   | *Fix soon*                       |
+| 🔵 **Info** | No direct risk, but useful for system hardening (e.g., missing security headers).                                            | *Monitor and fix in maintenance* |
+
 
 ---
 
-## 2. Executive Summary
+# 4️⃣ Findings (filled with examples → replace)
 
-**Short summary:**
-The website's registration is currently not secure because passwords are saved in plain text and anyone can choose to be an Admin. Also, the form accepts impossible birth dates, and the login button doesn't work, so the system needs major fixes before it can be used.
-
-**Overall risk level:** 🔴 **High**
-
-**Top 5 immediate actions:**
-1. **Implement Strong Password Hashing:** Immediately stop storing passwords in plain text (F-01).
-2. **Restrict Administrative Role Assignment:** Remove the role selection dropdown from the public registration form (F-03).
-3. **Enforce Strict Server-Side Validation:** Fix the disconnect between the frontend and the database (F-07).
-4. **Fix Core Authentication Functionality:** Resolve the technical bugs preventing the Login button from working (F-05).
-5. **Enhance Data Input Sanitization:** Improve handling of international characters (F-09) and email domain verification (F-08).
-
----
-
-## 3. Findings
 
 | ID | Severity | Finding | Description | Evidence / Proof |
-|:---|:---|:---|:---|:---|
-| **F-01** | 🔴 High | Plain-text password storage | The database stores passwords without any hashing or encryption. | `SELECT * FROM booking_users;` shows readable passwords. ![Picture 1](picture1.png) |
-| **F-02** | 🟠 Medium | Lack of age validation | The system ignores the "15+ years old" rule and accepts unrealistic birth years. | Registration successful with birth year 1825. ![Picture 1](picture1.png) |
-| **F-03** | 🔴 High | Insecure Privilege Assignment | New users can choose their own permission level (Admin) during registration. | Dropdown menu allows "Admin" selection. ![Picture 1](picture1.png) |
-| **F-04** | 🔵 Info | Basic Email Syntax Check | The system requires an "@" symbol to proceed. | Error occurs when registering without "@". |
-| **F-05** | 🟡 Low | Broken Login & Navigation | The Login button and internal pages are non-functional. | Button does nothing; pages return 404 Not Found. ![Picture 4](picture4.png) |
-| **F-06** | 🔴 High | Empty Password Acceptance | The system accepts passwords consisting only of blank spaces (" "). | Account created with " " as password. ![Picture 1](picture1.png) |
-| **F-07** | 🟠 Medium | Silent Frontend Errors | JavaScript error logic exists in the code but is never displayed. | No feedback given for invalid data. ![Picture 2](picture2.png) |
-| **F-08** | 🟡 Low | Lack of Domain Validation | The system accepts fake email domains (ex: @abcde). | Registration successful with non-existent providers. ![Picture 1](picture1.png) |
-| **F-09** | 🟡 Low | Non-Latin Character Failure | System fails to process non-Latin characters (ex: Chinese). | Registration fails silently. |
-| **F-10** | 🔵 Info | Input Length Restriction | The system correctly blocks excessively long strings. | Long text of "A"s was rejected. |
-| **F-11** | 🔵 Info | Duplicate Email Protection | Prevents multiple accounts with the same email. | Error "Error during the registration" triggered. ![Picture 3](picture3.png) |
+|------|-----------|----------|--------------|------------------|
+| F-01 | 🔴 High | SQL Injection in registration | Input field answers differently depends of the SQL injection | Different answers with AND 1=1 AND 1=2 <img width="710" height="435" alt="sql injection" src="https://github.com/user-attachments/assets/02503812-9e0b-48b4-a1ba-0d0262eb633a" /> <img width="691" height="528" alt="sql injection2" src="https://github.com/user-attachments/assets/5dc0984f-301d-41d9-a4b4-c7ad24d20beb" />|
+| F-02 | 🔴 High | Plain-text password storage | The database stores passwords without any hashing or encryption. |SELECT * FROM booking_users; shows readable passwords <img width="912" height="167" alt="image" src="https://github.com/user-attachments/assets/9074e856-479a-4ccc-8fcc-6b3d45135aa7" />|
+| F-03 | 🟠 Medium | Absence of Anti-CSRF Tokens | The CSRF token is inexistant on the server side| No mention of the token on the request <img width="1390" height="1044" alt="image" src="https://github.com/user-attachments/assets/f9eb9d56-5b79-410f-9451-0fa98e26e56b" />|
+| F-04 | 🟡 Low | Lack of Domain Validation | The system accepts fake email domains (ex: @abcde) | Registration successful with non-existent domain @qfknlfv <img width="912" height="167" alt="image" src="https://github.com/user-attachments/assets/1d47a297-4be1-4916-9b69-3dfc15daa552" />|
+| F-05 | 🟡 Low | Weak password policy | Accepts passwords consisting only of blank spaces (" "). | Account created with " " as password.<img width="912" height="167" alt="image" src="https://github.com/user-attachments/assets/3885fd00-e920-46c4-9a90-f8f5dfe4b1d3" />|
+
+---
+
+# 5️⃣ OWASP ZAP Test Report (Attachment)
+
+ 
+- [zap_report_round1.md](./zap_report_round1.md)
+---
+
+> [!NOTE]
+> 📁 **Attach full report:** → [check itslearning](https://centria.itslearning.com/ContentArea/ContentArea.aspx?LocationID=10880&LocationType=1&ElementID=652074)
+
+---
