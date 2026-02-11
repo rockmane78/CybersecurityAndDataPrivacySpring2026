@@ -15,4 +15,4 @@
 | 30.1.2025 | 4 | Booking system project  | phase 1 part 1 near finished |
 | 4.2.2025 | 2 | Booking system project  | phase 1 part 1 finished and submitted |
 | 11.2.2025 | 5 | Booking system project  | phase 1 part 2 finished and submitted |
-| TOTAL: | 33h |
+| TOTAL: | 38h |
