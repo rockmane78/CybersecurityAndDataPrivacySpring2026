@@ -19,4 +19,5 @@
 | 12.2.2025 | 1 | Booking system project  | phase 2 debuted |
 | 13.2.2025 | 2 | LAB  | 18 LABs completed |
 | 13.2.2025 | 3 | Booking system project  | phase 2 near finished |
-| TOTAL: | 50h |
+| 18.2.2025 | 4 | Booking system project  | phase 2 completed |
+| TOTAL: | 54h |
