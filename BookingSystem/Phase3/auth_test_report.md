@@ -99,13 +99,13 @@ This report documents the authorization testing for the resource booking system.
 
 ## ⚠️ Findings
 
-#### Critical Vulnerabilities (GDPR & Security)
+### Critical Vulnerabilities (GDPR & Security)
 * **Unauthenticated API Exposure (`/api/users`, `/api/reservations`)**
     * **Description:** The API endpoints used to fetch user data and reservation details are accessible without authentication.
     * **Impact:** Any guest can retrieve all user emails, session tokens, and roles. This is a critical violation of GDPR (Privacy by Design and Default).
     * **Spec Violation:** 8, 9, 10.
 
-#### Authorization Bypasses (IDOR)
+### Authorization Bypasses (IDOR)
 * **Unauthorized Booking Modification (`/reservation?id=X`)**
     * **Description:** Registered users can change the `id` parameter in the URL to access the modification form of bookings they do not own.
     * **Impact:** Users can alter reservation times and details for other users.
@@ -116,7 +116,7 @@ This report documents the authorization testing for the resource booking system.
     * **Impact:** Users can delete data belonging to other users.
     * **Spec Violation:** 3, 4, 5.
 
-#### Functionality & Specification Gaps
+### Functionality & Specification Gaps
 * **Missing User Management Interface (Admin)**
     * **Description:** The Administrator does not have a dedicated UI panel to manage users (delete reservers). It must be done via API manipulation.
     * **Spec Violation:** 5.
@@ -128,3 +128,4 @@ This report documents the authorization testing for the resource booking system.
 * **Missing "Right to be Forgotten" (GDPR)**
     * **Description:** There is no functionality for a Reserver to delete their own account.
     * **Spec Violation:** 9.
+
