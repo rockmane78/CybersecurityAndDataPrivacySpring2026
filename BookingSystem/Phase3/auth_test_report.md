@@ -143,7 +143,8 @@ This report documents the authorization testing for the resource booking system.
 | **Delete Resources/Users** | Forbidden | Forbidden | Vulnerable (API Only) |
 | **Access API (`/api/users`)** | Vulnerable (No Auth)| Allowed | Allowed |
 
-### 🔍 Legend
+### Legend
 * **Allowed:** Functionality works according to specifications.
 * **Forbidden:** Functionality is properly blocked.
 * **Vulnerable:** Functionality works, but violates security, GDPR, or spec requirements.
+
