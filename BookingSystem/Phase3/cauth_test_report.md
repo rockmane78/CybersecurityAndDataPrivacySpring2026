@@ -17,17 +17,15 @@ This report documents the authorization testing for the resource booking system.
   * *Observation:* Accessible (Spec 2).
 * **View booked resources** — `/`
   * *Observation:* Displays booked resources without revealing reserver identity (Spec 8).
-* **Access API endpoints** — `/api/reservations`
-  * *Observation:* print all information of other register.
+
 
 ### ❌ Cannot do
-* **Access profile page** — `/profile`
-  * *Observation:* Blocked. Print 'not found'.
 * **Access reservation page** — `/reservation`
   * *Observation:* Blocked. Redirects to back home.
-* **Access reservation page** — `/reservation`
-  * *Observation:* Correctly blocked when age is under 15 years.Redirects to back home.
 
+### ⚠️ Vulnerabilities (GDPR Violation)
+* **Access API endpoints** — `/api/reservations`
+  * *Observation:* print all information of other register.
 
 ---
 
@@ -38,46 +36,40 @@ This report documents the authorization testing for the resource booking system.
 * **Book a resource** — `/reservation`
   * *Observation:* Accessible. User can book on an hourly basis (Spec 7).
   * *Note:* Requires user to be over 15 years old (Spec 6).
-* **View own profile** — `/profile`
-  * *Observation:* Displays personal profile information.
 * **List available resources** — `/resources`
-  * *Observation:* Accessible.
+  * *Observation:* Accessible. User can creat ressources.
 
 ### ❌ Cannot do
-* **Access admin dashboard** — `/admin`
-  * *Observation:* [REMPLIR : Bloqué par le serveur ?]
-* **Delete other users** — `/api/admin/users/:id`
-  * *Observation:* Correctement bloqué (Spec 4 & 5 réservés à l'admin).
-* **Modify/Delete resources** — `/api/resources/:id`
-  * *Observation:* Devrait être réservé à l'administrateur uniquement.
+* **View other user profile** 
+  * *Observation:* no indication in the URL
+
+
+### ⚠️ Vulnerabilities (GDPR Violation)
+* **IDOR on Bookings** — `/reservation?id=X`
+    * *Observation:* Users can access and modify bookings belonging to others by changing the ID in the URL.
+* **Privilege Escalation** — `/api/resources/:id`
+  * *Observation:* Users can take ownership of another user's booking by changing the "Reserver" field in the form, and subsequently delete it.
+* **GDPR Compliance**
+  * *Observation:* Users cannot delete their own accounts (Violation of GDPR "Right to be Forgotten").
 
 ---
 
 ## 🧑‍💼🛡️ Administrator
-*High-privilege account with full control.*
+*High-privilege account with full control. Logged in as: `mari@doe.com`*
 
 ### ✅ Can do
-* **Add/Remove/Modify resources** — `/admin/resources`
+* **Full System Management** 
   * *Observation:* Full control over resource management (Spec 4).
-* **Delete a reserver** — `/admin/users/delete/:id`
+* **Delete a reserver** — `/reservation?id=X`
   * *Observation:* Functional (Spec 5).
-* **Manage all reservations** — `/admin/reservations`
+* **Manage all reservations** — `/reservations`
   * *Observation:* Can view and modify any booking (Spec 4).
 
 ### ❌ Cannot do
-* **Excessive data exposure**
-  * *Observation:* Check if Admin has access to data not required by GDPR or PbD principles.
+
 
 ---
 
-## 🔍 Tools Used & Methodology
-* **Manual Browser Testing:** Verification of UI elements, forms, and redirects.
-* **Gobuster (Windows):** Discovery of unreferenced endpoints and hidden directories.
-* **Burp Suite:** Intercepting requests to test for IDOR (Insecure Direct Object Reference) and backend authorization.
-* **ZAP (Collaborator):** Automated vulnerability scan results integrated from `zap_report_round4.md`.
-
----
-
-## ⚠️ Discrepancies & Findings
+## ⚠️ Findings
 *(Note ici si quelque chose ne respecte pas les specs du prof)*
 * **Example:** "Spec 8 says no identity for Guest, but identity is visible in API response."
