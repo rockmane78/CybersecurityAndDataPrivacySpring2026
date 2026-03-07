@@ -22,4 +22,6 @@
 | 18.2.2025 | 4 | Booking system project  | phase 2 completed |
 | 23.2.2025 | 4 | Booking system project  | phase 3 debuted |
 | 1.3.2025 | 5 | Booking system project  | phase 3 completed |
-| TOTAL: | 63h |
+| 2.3.2025 | 2 | Final assignment  | Portsigger part and ducument outline finished |
+| 7.3.2025 | 5 | Booking system project  | phase 4 started |
+| TOTAL: | 70h |
