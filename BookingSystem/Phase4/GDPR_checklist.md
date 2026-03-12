@@ -42,7 +42,7 @@
 
 | **Result** | **Data security** | **Notes**
 | :----: | :--- | :--- |
-| ✅/❌/⚠️&nbsp; | Are CSRF, XSS, and SQL injection protections implemented? |
+| ✅ | Are CSRF, XSS, and SQL injection protections implemented? | The site uses token |
 | ✅ | Are passwords securely hashed using a strong algorithm (e.g., bcrypt, Argon2)? | Password are well hashed in the database|
 | ❌ | Are data backup and recovery processes GDPR-compliant? | Are data backup and recovery processes GDPR-compliant? (No documentation found). |
 | ✅ | Is personal data stored in data centers located within the EU? | Since it's a local lab (localhost), it's stored on your machine in the EU. |
