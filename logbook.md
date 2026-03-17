@@ -26,4 +26,6 @@
 | 7.3.2025 | 5 | Booking system project  | phase 4 started |
 | 11.3.2025 | 3 | Booking system project  | phase 4 started (GDPR file finished) |
 | 12.3.2025 | 4 | Booking system project  | phase 4 near finished |
-| TOTAL: | 76h |
+| 15.3.2025 | 2 | Booking system project  | phase 4 finished |
+| 17.3.2025 | 5 |  Final assignment | Final assignment finished |
+| TOTAL: | 83h |
