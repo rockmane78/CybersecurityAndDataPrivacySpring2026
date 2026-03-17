@@ -1,7 +1,7 @@
 # 🎓 Final assignment for the project and course
 ---
 ## 🛡️ PortSwigger : 
-https://github.com/athenaislemais/CybersecurityAndDataPrivacySpring2026/issues/1#issue-4090420355
+![](https://github.com/athenaislemais/CybersecurityAndDataPrivacySpring2026/issues/1#issue-4090420355)
 ### SQL injection
 1. **SQL injection vulnerability in WHERE clause allowing retrieval of hidden data ➔** Add `OR 1=1--` to see private items.
 2. **SQL injection vulnerability allowing login bypass ➔** Use `admin'--` to login without password.
